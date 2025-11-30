@@ -1,8 +1,11 @@
+// Package server implements the HTTP server using the Gin framework.
 package server
+
 import (
 	"fmt"
 
-	"gopastbin/internal/config"
+	"gopastbin/internal/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,20 +16,9 @@ type Server struct {
 
 // NewServer initializes the Gin router and returns a Server instance
 func NewServer(port string) *Server {
-	r := gin.Default()
+	r := http.SetupRoutes()
 
-	// Example health check route
-	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"status": "ok",
-		})
-	})
-	r.GET("/port", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"port": config.LoadConfig().Port,
-		})
-	})
-
+	// setup all routes here
 	return &Server{
 		router: r,
 		port:   port,
