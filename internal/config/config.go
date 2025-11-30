@@ -30,7 +30,7 @@ func LoadConfig() *Config {
 }
 
 // getEnv reads an env variable or returns default
-func getEnv(key, defaultValue string) string {
+func getEnv(key string, defaultValue string) string {
     value := os.Getenv(key)
     if value == "" {
         return defaultValue
@@ -38,7 +38,7 @@ func getEnv(key, defaultValue string) string {
     return value
 }
 
-// Helper to construct a PostgreSQL DSN
+// PostgresDSN Helper to construct a PostgreSQL
 func (c *Config) PostgresDSN() string {
     return fmt.Sprintf(
         "postgres://%s:%s@%s:%s/%s?sslmode=disable",
