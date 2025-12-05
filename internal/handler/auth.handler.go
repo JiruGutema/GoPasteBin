@@ -50,7 +50,7 @@ func RegisterHandler(ctx *gin.Context) {
 		ctx.JSON(400, "Error getting user information")
 		return
 	}
-	resp, accessToken, refreshToken, err := service.RegisterServices(user)
+	resp, accessToken, refreshToken, err := service.RegisterService(user)
 
 	if errors.Is(err, service.ErrUserExists) {
 		ctx.JSON(409, gin.H{
